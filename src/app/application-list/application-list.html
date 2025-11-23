@@ -2,6 +2,7 @@
   <h1>Developer portal</h1>
 
   <h2>My Applications</h2>
+  <a class="btn btn-primary" routerLink="/application/register" role="button">Create Application</a>
   @for(app of this.developerApplications(); track app.applicationId) {
   <div class="card">
     <div class="card-body">
