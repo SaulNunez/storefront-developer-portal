@@ -13,11 +13,16 @@
         <textarea class="form-control" id="appDescription" rows="3"></textarea>
     </div>
     <div class="mb-3">
-        <label for="appCategory" class="form-label">App Description</label>
+        <label for="appCategory" class="form-label">App Category</label>
+        @if (this.loadingAppCategories()) {
+        <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        }
         <select class="form-select" id="appCategory" aria-label="App Category">
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            @for (category of this.appCategoryList(); track category.id) {
+                <option [value]="category.id"> {{ category.name }} </option>
+            }
         </select>
     </div>
     <div class="mb-3">

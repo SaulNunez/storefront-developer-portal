@@ -5,6 +5,7 @@ import { ApplicationEdit } from './application-edit/application-edit';
 import { WindowsRelease } from './windows-release/windows-release';
 import { AndroidRelease } from './android-release/android-release';
 import { MacRelease } from './mac-release/mac-release';
+import { ApplicationList } from './application-list/application-list';
 
 export const routes: Routes = [
     {
@@ -13,14 +14,14 @@ export const routes: Routes = [
         component: ApplicationList
     },
         {
-        title: 'Application Details',
-        path: 'application/:applicationId',
-        component: ApplicationDetails
-    },
-    {
         title: 'Register Application',
         path: 'application/register',
         component: ApplicationCreate
+    },
+        {
+        title: 'Application Details',
+        path: 'application/:applicationId',
+        component: ApplicationDetails
     },
     {
         title: 'Edit Application Entry',
