@@ -14,6 +14,12 @@ export class ApplicationService {
       context: withCache()
     });
   }
+  getApplicationById(applicationId: string){
+    return this.httpClient.get<Application>(`/api/developer/application/${applicationId}`, {
+      context: withCache()
+    });
+  }
+
   getWindowsReleaseById(applicationId: string, releaseId: string) {
 
   }
