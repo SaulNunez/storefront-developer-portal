@@ -1,1 +1,70 @@
-<p>windows-release works!</p>
+<div class="container">
+    <h1>Register Windows Release</h1>
+    <form>
+        <div class="mb-3">
+            <label for="versionId" class="form-label">Version ID</label>
+            <input type="text" class="form-control" id="versionId" placeholder="v1.0.0"
+                aria-describedby="versionHelpBlock">
+            <div id="versionHelpBlock" class="form-text">
+                Some versioning systems are semantic versioning (major.minor.patch), date versioning (YYYY.MM.DD).
+                This ID is for you and users to identify a release.
+
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="changes" class="form-label">Release Notes</label>
+            <textarea class="form-control" id="changes"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </form>
+    <h2>Binaries</h2>
+    <div ngbAccordion id="accordionPanelsStayOpenExample">
+        <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>
+                    AMD64
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <app-windows-variant-upload></app-windows-variant-upload>
+                </div>
+            </div>
+        </div>
+        <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>
+                    ARM64
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <app-windows-variant-upload></app-windows-variant-upload>
+                </div>
+            </div>
+        </div>
+        <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>
+                    Intel 32-bits
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <app-windows-variant-upload></app-windows-variant-upload>
+                </div>
+            </div>
+        </div>
+        <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>
+                    ARM 32-bits
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <app-windows-variant-upload></app-windows-variant-upload>
+                </div>
+            </div>
+        </div>
+</div>
