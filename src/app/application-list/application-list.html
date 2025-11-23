@@ -1,0 +1,11 @@
+<h1>Developer portal</h1>
+
+<h2>My Applications</h2>
+@for(app of this.developerApplications(); track app.applicationId) {
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{app.name}}</h5>
+    <a [routerLink]="['application', app.applicationId]" class="card-link">Details</a>
+  </div>
+</div>
+}

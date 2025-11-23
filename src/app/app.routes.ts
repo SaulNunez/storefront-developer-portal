@@ -10,6 +10,7 @@ export const routes: Routes = [
     {
         title: 'Developer Portal',
         path: '',
+        component: ApplicationList
     },
         {
         title: 'Application Details',

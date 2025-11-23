@@ -9,9 +9,32 @@ import { withCache } from '@ngneat/cashew';
 export class ApplicationService {
   private httpClient = inject(HttpClient);
   
-  getApplications() {
-    return this.httpClient.get<Application[]>('/api/applications', {
+  getSubmittedApplications() {
+    return this.httpClient.get<Application[]>('/api/developer/application', {
       context: withCache()
     });
+  }
+  getWindowsReleaseById(applicationId: string, releaseId: string) {
+
+  }
+
+  getWindowsReleases(applicationId: string) {
+
+  }
+
+  getMacReleaseById(applicationId: string, releaseId: string) {
+
+  }
+
+  getMacReleases(applicationId: string) {
+
+  }
+
+  getAndroidReleaseById(applicationId: string, releaseId: string) {
+
+  }
+
+  getAndroidReleases(applicationId: string) {
+
   }
 }
