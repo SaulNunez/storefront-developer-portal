@@ -1,37 +1,39 @@
-<h1>Register application</h1>
-<form>
-    <div class="mb-3">
-        <label for="appName" class="form-label">App name</label>
-        <input type="text" class="form-control" id="appName" placeholder="My App">
-    </div>
-    <div class="mb-3">
-        <label for="appHero" class="form-label">App Short Description</label>
-        <input type="text" class="form-control" id="appHero" placeholder="The best app!">
-    </div>
-    <div class="mb-3">
-        <label for="appDescription" class="form-label">App Description</label>
-        <textarea class="form-control" id="appDescription" rows="3"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="appCategory" class="form-label">App Category</label>
-        @if (this.loadingAppCategories()) {
-        <div class="spinner-border spinner-border-sm" role="status">
-            <span class="visually-hidden">Loading...</span>
+<div class="container">
+    <h1>Register application</h1>
+    <form>
+        <div class="mb-3">
+            <label for="appName" class="form-label">App name</label>
+            <input type="text" class="form-control" id="appName" placeholder="My App">
         </div>
-        }
-        <select class="form-select" id="appCategory" aria-label="App Category">
-            @for (category of this.appCategoryList(); track category.id) {
-                <option [value]="category.id"> {{ category.name }} </option>
+        <div class="mb-3">
+            <label for="appHero" class="form-label">App Short Description</label>
+            <input type="text" class="form-control" id="appHero" placeholder="The best app!">
+        </div>
+        <div class="mb-3">
+            <label for="appDescription" class="form-label">App Description</label>
+            <textarea class="form-control" id="appDescription" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="appCategory" class="form-label">App Category</label>
+            @if (this.loadingAppCategories()) {
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
             }
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Storefront Icon</label>
-        <input class="form-control" type="file" id="formFile" aria-describedby="iconHelpBlock">
-        <div id="iconHelpBlock" class="form-text">
-        This icon should be a square image file (PNG) with a target size of 512x512 pixels.
-        Transparency is supported.
+            <select class="form-select" id="appCategory" aria-label="App Category">
+                @for (category of this.appCategoryList(); track category.id) {
+                <option [value]="category.id"> {{ category.name }} </option>
+                }
+            </select>
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Application</button>
-</form>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Storefront Icon</label>
+            <input class="form-control" type="file" id="formFile" aria-describedby="iconHelpBlock">
+            <div id="iconHelpBlock" class="form-text">
+                This icon should be a square image file (PNG) with a target size of 512x512 pixels.
+                Transparency is supported.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Application</button>
+    </form>
+</div>

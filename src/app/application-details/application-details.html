@@ -1,18 +1,20 @@
-@if (this.application() !== null) {
-<h1> {{ this.application()?.name }} </h1>
+<div class="container">
+    @if (this.application() !== null) {
+    <h1> {{ this.application()?.name }} </h1>
 
-<h2>Releases</h2>
-<a [routerLink]="['/application', this.application()?.applicationId, 'release', 'windows']"
-    class="btn btn-outline-primary">Create Windows Release</a>
-<a [routerLink]="['/application', this.application()?.applicationId, 'release', 'mac']"
-    class="btn btn-outline-primary">Create Mac Release</a>
-<a [routerLink]="['/application', this.application()?.applicationId, 'release', 'android']"
-    class="btn btn-outline-primary">Create Android Release</a>
-}
-@else {
-<div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+    <h2>Releases</h2>
+    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'windows']"
+        class="btn btn-outline-primary">Create Windows Release</a>
+    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'mac']"
+        class="btn btn-outline-primary">Create Mac Release</a>
+    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'android']"
+        class="btn btn-outline-primary">Create Android Release</a>
+    }
+    @else {
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
 </div>
-}
