@@ -10,12 +10,12 @@ export class ApplicationService {
   private httpClient = inject(HttpClient);
   
   getSubmittedApplications() {
-    return this.httpClient.get<Application[]>('/api/developer/application', {
+    return this.httpClient.get<Application[]>(`${environment.apiUrl}/developer/application`, {
       context: withCache()
     });
   }
   getApplicationById(applicationId: string){
-    return this.httpClient.get<Application>(`/api/developer/application/${applicationId}`, {
+    return this.httpClient.get<Application>(`${environment.apiUrl}/developer/application/${applicationId}`, {
       context: withCache()
     });
   }
