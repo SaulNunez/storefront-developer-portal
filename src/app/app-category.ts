@@ -1,4 +1,4 @@
 export interface AppCategory {
-    id: string,
+    id: number,
     name: string
 }

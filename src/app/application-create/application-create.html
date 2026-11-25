@@ -1,39 +1,67 @@
 <div class="container">
     <h1>Register application</h1>
-    <form>
+
+    @if (errorMessage()) {
+    <div class="alert alert-danger" role="alert">
+        {{ errorMessage() }}
+        @if (createdWithoutIcon(); as created) {
+        <a [routerLink]="['/application', created.applicationId]" class="alert-link">Go to {{ created.name }}</a>
+        }
+    </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <div class="mb-3">
             <label for="appName" class="form-label">App name</label>
-            <input type="text" class="form-control" id="appName" placeholder="My App">
+            <input type="text" class="form-control" id="appName" placeholder="My App" formControlName="applicationName"
+                [class.is-invalid]="isInvalid('applicationName')">
+            <div class="invalid-feedback">Enter a name of up to 200 characters.</div>
         </div>
         <div class="mb-3">
             <label for="appHero" class="form-label">App Short Description</label>
-            <input type="text" class="form-control" id="appHero" placeholder="The best app!">
+            <input type="text" class="form-control" id="appHero" placeholder="The best app!" formControlName="shortDescription"
+                [class.is-invalid]="isInvalid('shortDescription')">
+            <div class="invalid-feedback">Enter a short description of up to 300 characters.</div>
         </div>
         <div class="mb-3">
             <label for="appDescription" class="form-label">App Description</label>
-            <textarea class="form-control" id="appDescription" rows="3"></textarea>
+            <textarea class="form-control" id="appDescription" rows="3" formControlName="applicationDescription"
+                [class.is-invalid]="isInvalid('applicationDescription')"></textarea>
+            <div class="invalid-feedback">Enter a description.</div>
         </div>
         <div class="mb-3">
             <label for="appCategory" class="form-label">App Category</label>
-            @if (this.loadingAppCategories()) {
+            @if (loadingAppCategories()) {
             <div class="spinner-border spinner-border-sm" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
             }
-            <select class="form-select" id="appCategory" aria-label="App Category">
-                @for (category of this.appCategoryList(); track category.id) {
-                <option [value]="category.id"> {{ category.name }} </option>
+            <select class="form-select" id="appCategory" aria-label="App Category" formControlName="categoryId"
+                [class.is-invalid]="isInvalid('categoryId')">
+                <option [ngValue]="0" disabled>Choose a category</option>
+                @for (category of appCategoryList(); track category.id) {
+                <option [ngValue]="category.id">{{ category.name }}</option>
                 }
             </select>
+            <div class="invalid-feedback">Choose a category.</div>
         </div>
         <div class="mb-3">
             <label for="formFile" class="form-label">Storefront Icon</label>
-            <input class="form-control" type="file" id="formFile" aria-describedby="iconHelpBlock">
+            <input class="form-control" type="file" id="formFile" accept="image/png" aria-describedby="iconHelpBlock"
+                (change)="onIconSelected($event)" [class.is-invalid]="iconError()">
+            @if (iconError()) {
+            <div class="invalid-feedback">{{ iconError() }}</div>
+            }
             <div id="iconHelpBlock" class="form-text">
-                This icon should be a square image file (PNG) with a target size of 512x512 pixels.
-                Transparency is supported.
+                This icon should be a square image file (PNG) with a target size of 512x512 pixels, up to 2 MB.
+                Transparency is supported. You can add it later.
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create Application</button>
+        <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+            @if (submitting()) {
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            }
+            Create Application
+        </button>
     </form>
 </div>
