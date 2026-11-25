@@ -1,0 +1,26 @@
+{
+  "/api": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/Identity": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/lib": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/css": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/js": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/Storefront.styles.css": {
+    "target": "http://localhost:5000",
+    "secure": false
+  }
+}

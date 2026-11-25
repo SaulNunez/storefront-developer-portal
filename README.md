@@ -2,6 +2,21 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
 
+## Running against the Storefront backend
+
+The portal is served from the same host as the Storefront backend and signs in with its
+ASP.NET Identity cookie, so there is no CORS or token setup. In development, `ng serve`
+proxies `/api`, `/Identity` and the backend's static files to `http://localhost:5000`
+(see `proxy.conf.json`), which is where `dotnet run` listens by default. Start the backend
+first, then `ng serve`.
+
+Signed-out API calls return 401 and the portal sends you to the Identity login page, which
+returns you to the portal afterwards. Creating applications needs the `Developer` (or
+`Administrator`) role on your account; without it the API answers 403.
+
+Icons are uploaded to the backend (`POST /api/developers/applications/{id}/icon`), which
+stores them in S3-compatible object storage.
+
 ## Development server
 
 To start a local development server, run:

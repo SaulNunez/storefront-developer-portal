@@ -11,7 +11,7 @@ export class AppCategoriesService {
   private httpClient = inject(HttpClient);
   
   getApplicationCategories() {
-    return this.httpClient.get<AppCategory[]>(`${environment.apiUrl}/app-categories`, {
+    return this.httpClient.get<AppCategory[]>(`${environment.apiUrl}/appcategories`, {
       context: withCache()
     });
   }
