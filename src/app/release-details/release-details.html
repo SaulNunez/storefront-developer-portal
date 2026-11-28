@@ -1,0 +1,51 @@
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/application', applicationId]">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Release</li>
+        </ol>
+    </nav>
+
+    @if (release(); as release) {
+    <div class="d-flex flex-wrap align-items-start gap-2 mb-3">
+        <div class="flex-grow-1">
+            <h1 class="mb-1">{{ platform()?.name }} {{ release.versionId }}</h1>
+            <div class="text-body-secondary">Created {{ release.createdAt | date: 'medium' }}</div>
+        </div>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteRelease()" [disabled]="deleting()">
+            Delete release
+        </button>
+    </div>
+
+    @if (errorMessage()) {
+    <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+    }
+
+    @if (release.releaseNotes) {
+    <h2 class="h4">Release notes</h2>
+    <p class="release-notes">{{ release.releaseNotes }}</p>
+    }
+
+    <h2 class="h4">Binaries</h2>
+    <p class="text-body-secondary">
+        Upload a binary for each CPU you build for. Users get the one that matches their device.
+    </p>
+    @for (entry of slots(); track entry.slot.label) {
+    <app-binary-slot [applicationId]="applicationId" [releaseId]="releaseId" [slot]="entry.slot"
+        [accept]="platform()?.accept ?? ''" [variant]="entry.variant" (uploaded)="onUploaded($event)"
+        (deleted)="onDeleted($event)" />
+    }
+    @for (entry of otherBinaries(); track entry.variant.id) {
+    <app-binary-slot [applicationId]="applicationId" [releaseId]="releaseId" [slot]="entry.slot"
+        [variant]="entry.variant" (deleted)="onDeleted($event)" />
+    }
+    } @else if (loadError()) {
+    <div class="alert alert-danger" role="alert">{{ loadError() }}</div>
+    } @else {
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
+</div>

@@ -2,9 +2,8 @@ import { Routes } from '@angular/router';
 import { ApplicationCreate } from './application-create/application-create';
 import { ApplicationDetails } from './application-details/application-details';
 import { ApplicationEdit } from './application-edit/application-edit';
-import { WindowsRelease } from './windows-release/windows-release';
-import { AndroidRelease } from './android-release/android-release';
-import { MacRelease } from './mac-release/mac-release';
+import { ReleaseCreate } from './release-create/release-create';
+import { ReleaseDetails } from './release-details/release-details';
 import { ApplicationList } from './application-list/application-list';
 
 export const routes: Routes = [
@@ -29,18 +28,13 @@ export const routes: Routes = [
         component: ApplicationEdit
     },
     {
-        title: 'Windows Release',
-        path: 'application/:applicationId/release/windows',
-        component: WindowsRelease
+        title: 'New Release',
+        path: 'application/:applicationId/release/:platform',
+        component: ReleaseCreate
     },
     {
-        title: 'Android Release',
-        path: 'application/:applicationId/release/android',
-        component: AndroidRelease
-    },
-    {
-        title: 'Mac Release',
-        path: 'application/:applicationId/release/mac',
-        component: MacRelease
+        title: 'Release',
+        path: 'application/:applicationId/release/:platform/:releaseId',
+        component: ReleaseDetails
     }
 ];

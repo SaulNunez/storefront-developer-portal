@@ -1,0 +1,45 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <h3 class="h5 card-title mb-1">{{ slot().label }}</h3>
+        @if (slot().hint) {
+        <p class="card-subtitle text-body-secondary small mb-3">{{ slot().hint }}</p>
+        }
+
+        @if (fileError() ?? errorMessage(); as message) {
+        <div class="alert alert-danger py-2" role="alert">{{ message }}</div>
+        }
+
+        @if (variant(); as variant) {
+        <div class="d-flex flex-wrap align-items-center gap-3">
+            <div class="flex-grow-1">
+                <div class="fw-semibold text-break">{{ variant.fileName }}</div>
+                <div class="small text-body-secondary">
+                    {{ formatBytes(variant.fileSizeBytes) }} · uploaded {{ variant.uploadedAt | date: 'medium' }}
+                </div>
+                @if (variant.sha256) {
+                <div class="small text-body-secondary text-break"><span class="font-monospace">SHA-256 {{ variant.sha256 }}</span></div>
+                }
+            </div>
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteBinary()" [disabled]="deleting()">
+                Delete
+            </button>
+        </div>
+        } @else if (progress() !== null) {
+        <div class="d-flex align-items-center gap-3">
+            <div class="progress flex-grow-1" role="progressbar" [attr.aria-label]="'Uploading ' + file()?.name"
+                [attr.aria-valuenow]="progress()" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" [style.width.%]="progress()">{{ progress() }}%</div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelUpload()">Cancel</button>
+        </div>
+        } @else {
+        <div class="d-flex flex-wrap gap-2">
+            <input class="form-control flex-grow-1 w-auto" type="file" [accept]="accept()"
+                [attr.aria-label]="'Binary for ' + slot().label" (change)="onFileSelected($event)">
+            <button type="button" class="btn btn-primary" (click)="startUpload()" [disabled]="!file() || fileError()">
+                Upload
+            </button>
+        </div>
+        }
+    </div>
+</div>
