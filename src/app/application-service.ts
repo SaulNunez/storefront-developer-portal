@@ -32,28 +32,4 @@ export class ApplicationService {
     formData.append('icon', icon);
     return this.httpClient.post<Application>(`${this.baseUrl}/${applicationId}/icon`, formData);
   }
-
-  getWindowsReleaseById(applicationId: string, releaseId: string) {
-
-  }
-
-  getWindowsReleases(applicationId: string) {
-
-  }
-
-  getMacReleaseById(applicationId: string, releaseId: string) {
-
-  }
-
-  getMacReleases(applicationId: string) {
-
-  }
-
-  getAndroidReleaseById(applicationId: string, releaseId: string) {
-
-  }
-
-  getAndroidReleases(applicationId: string) {
-
-  }
 }

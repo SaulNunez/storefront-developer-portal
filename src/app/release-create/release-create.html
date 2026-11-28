@@ -1,0 +1,41 @@
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/application', applicationId]">Application</a></li>
+            <li class="breadcrumb-item active" aria-current="page">New release</li>
+        </ol>
+    </nav>
+
+    @if (platform; as platform) {
+    <h1>New {{ platform.name }} release</h1>
+
+    @if (errorMessage()) {
+    <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="mb-3">
+            <label for="versionId" class="form-label">Version</label>
+            <input type="text" class="form-control" id="versionId" placeholder="1.0.0" formControlName="versionId"
+                aria-describedby="versionHelpBlock" [class.is-invalid]="isInvalid('versionId')">
+            <div class="invalid-feedback">Enter a version of up to 100 characters.</div>
+            <div id="versionHelpBlock" class="form-text">
+                Any scheme works, for example semantic versioning (1.4.2) or dates (2026.11.28).
+                You and your users see it, and each version can be released once per platform.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="releaseNotes" class="form-label">Release notes</label>
+            <textarea class="form-control" id="releaseNotes" rows="5" formControlName="releaseNotes"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+            @if (submitting()) {
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            }
+            Create release and add binaries
+        </button>
+    </form>
+    } @else {
+    <div class="alert alert-warning" role="alert">Releases can be created for Windows, Mac and Android.</div>
+    }
+</div>

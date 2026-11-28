@@ -1,14 +1,35 @@
 <div class="container">
-    @if (this.application() !== null) {
-    <h1> {{ this.application()?.name }} </h1>
+    @if (this.application(); as application) {
+    <h1>{{ application.name }}</h1>
 
     <h2>Releases</h2>
-    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'windows']"
-        class="btn btn-outline-primary">Create Windows Release</a>
-    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'mac']"
-        class="btn btn-outline-primary">Create Mac Release</a>
-    <a [routerLink]="['/application', this.application()?.applicationId, 'release', 'android']"
-        class="btn btn-outline-primary">Create Android Release</a>
+    @for (group of releasesByPlatform(); track group.platform.slug) {
+    <section class="mb-4">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <h3 class="h4 mb-0">{{ group.platform.name }}</h3>
+            <a [routerLink]="['/application', application.applicationId, 'release', group.platform.slug]"
+                class="btn btn-outline-primary btn-sm">New {{ group.platform.name }} release</a>
+        </div>
+        @if (group.releases.length) {
+        <div class="list-group">
+            @for (release of group.releases; track release.id) {
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                [routerLink]="['/application', application.applicationId, 'release', group.platform.slug, release.id]">
+                <span>
+                    <span class="fw-semibold">{{ release.versionId }}</span>
+                    <span class="text-body-secondary small ms-2">{{ release.createdAt | date: 'mediumDate' }}</span>
+                </span>
+                <span class="badge text-bg-secondary rounded-pill">
+                    {{ release.variants.length }} {{ release.variants.length === 1 ? 'binary' : 'binaries' }}
+                </span>
+            </a>
+            }
+        </div>
+        } @else {
+        <p class="text-body-secondary">No {{ group.platform.name }} releases yet.</p>
+        }
+    </section>
+    }
     }
     @else {
     <div class="d-flex justify-content-center">

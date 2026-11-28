@@ -118,6 +118,9 @@ export function validateIcon(file: File): string | null {
 /** Turns an API error into a sentence for the developer. */
 export function describeError(error: unknown): string {
   if (error instanceof HttpErrorResponse) {
+    if (error.status === 413) {
+      return 'The file is too large.';
+    }
     if (error.status === 403) {
       return 'Your account does not have the Developer role, so it cannot publish applications.';
     }
